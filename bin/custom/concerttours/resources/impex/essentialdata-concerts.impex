@@ -1,0 +1,65 @@
+# Hybris123SnippetStart essentialdata-albums.impex
+# ImpEx for Importing albums
+
+INSERT_UPDATE Album;code[unique=true];name;
+;AL001;Album1;
+;AL002;Album2;
+;AL003;Album3;
+;AL004;Album4;
+;AL005;Album5;
+;AL006;Album6;
+;AL007;Album7;
+;AL008;Album8;
+;AL009;Album9;
+;AL010;Album10;
+;AL011;Album11;
+;AL012;Album12;
+
+# ImpEx for Importing Authors
+
+INSERT_UPDATE Author;code[unique=true];name;
+;001;Author1;
+;002;Author2;
+;003;Author3;
+;004;Author4;
+;005;Author5;
+;006;Author6;
+;007;Author7;
+;008;Author8;
+;009;Author9;
+;010;Author10;
+;011;Author11;
+;012;Author12;
+
+# ImpEx for Importing composers
+
+INSERT_UPDATE Compositor;code[unique=true];name;
+;0001;Compositor1;
+;0002;Compositor2;
+;0003;Compositor3;
+;0004;Compositor4;
+;0005;Compositor5;
+;0006;Compositor6;
+;0007;Compositor7;
+;0008;Compositor8;
+;0009;Compositor9;
+;0010;Compositor10;
+;0011;Compositor11;
+;0012;Compositor12;
+
+# ImpEx for Importing Music Type Enum values into Little Concert Tours Store
+INSERT_UPDATE MusicType;code[unique=true]
+;rock
+;jazz
+;classical
+;pop
+;gospel
+;choral
+;sixties
+;seventies
+;eighties
+;nineties
+;maleVocals
+;femaleVocals
+
+# Hybris123SnippetEnd

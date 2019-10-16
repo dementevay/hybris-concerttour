@@ -1,0 +1,96 @@
+# Hybris123SnippetStart projectdata-albums.impex
+# ImpEx for Importing albums
+INSERT_UPDATE Song;code[unique=true];album(code)
+;01;AL001
+;02;AL001
+;03;AL001
+;04;AL002
+;05;AL002
+;06;AL003
+;07;AL004
+;08;AL005
+;09;AL006
+;10;AL007
+;11;AL008
+;12;AL008
+# Hybris123SnippetEnd
+
+# ImpEx for Importing authors
+INSERT_UPDATE Song;code[unique=true];authors(code)
+;01;001,002
+;02;001,003
+;03;002,003,004
+;04;005
+;05;003,004
+;06;006,007,008
+;07;006,009
+;08;006,010,011
+;09;010,011
+;10;003,007,012
+;11;006,007,012,012
+;12;002,003,005,008
+
+# ImpEx for Importing composers
+INSERT_UPDATE Song;code[unique=true];compositor(code)
+;01;0006
+;02;0005
+;03;0004
+;04;0004
+;05;0003
+;06;0002
+;07;0002
+;08;0001
+;09;0010
+;10;0012
+;11;0011
+;12;0011
+
+# ImpEx for Importing Songs music type assignments
+INSERT_UPDATE Song;code[unique=true];types(code)
+;01;rock,eighties
+;02;rock,eighties,jazz,femaleVocals
+;03;jazz,femaleVocals
+;04;choral,pop,gospel
+;05;choral,classical
+;06;seventies,rock,eighties
+;07;maleVocals,pop
+;08;pop
+;09;eighties
+;10;rock,eighties
+;11;nineties
+;12;jazz
+# Hybris123SnippetEnd
+
+# ImpEx for Importing Bands music type assignments
+INSERT_UPDATE Band;code[unique=true];types(code)
+;A001;rock,eighties
+;A006;rock,sixties,seventies,rock,eighties
+;A003;jazz,femaleVocals
+;A004;nineties,maleVocals,pop
+;A002;gospel
+;A005;choral,pop
+;A007;choral,classical
+
+# ImpEx for Importing Bands music type assignments
+
+INSERT_UPDATE Concert;code[unique=true];types(code)
+;20170101;eighties
+;20170102;rock
+;20170103;jazz
+;20170104;choral
+;20170105;gospel
+;20170106;classical,pop
+;20170107;pop
+# Hybris123SnippetEnd
+
+# ImpEx for Importing Bands music type assignments
+
+INSERT_UPDATE Concert;code[unique=true];songs(code)
+;20170101;01,02,03,04,05,06
+;20170102;02,03,04,06
+;20170103;01,02,03,04,05,06,07,08,09
+;20170104;01,02,03,04,05,06,07,08,09,10,11,12
+;20170105;04,05,06,07,08,09,10,11,12
+;20170106;01,02,03,04,05,06,07,08,09,10,11
+;20170107;02,03,07,08,09,10,11
+# Hybris123SnippetEnd
