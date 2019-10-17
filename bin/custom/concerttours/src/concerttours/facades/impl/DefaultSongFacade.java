@@ -13,6 +13,7 @@ import concerttours.service.ConcertService;
 import concerttours.service.SongService;
 import de.hybris.platform.core.model.product.ProductModel;
 import org.springframework.beans.factory.annotation.Required;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class DefaultSongFacade implements SongFacade
 {
     private SongService songService;
     private ConcertService concertService;
+//    private ConfigurationService configService;
+//    private static final String CONCERT_DETAIL_SONGS_COUNT = "concert.detail.songs.count";
 
     @Override
     public List<SongData> getSongsByConcerts(final String code)
@@ -140,10 +143,11 @@ public class DefaultSongFacade implements SongFacade
         return songFacadeData;
     }
 
-    public List<SongData> getHitsByConcert(final String code)
+    public List<SongData> getHitsByConcert(final String code, String ConcertDetailSongsCount)
     {
         final ConcertModel currentConcert = concertService.getConcertForCode(code);
-        final List<SongModel> songModels = songService.getHitsByConcert(code);
+//        final String SongsCount = configService.getConfiguration().getString(CONCERT_DETAIL_SONGS_COUNT);
+        final List<SongModel> songModels = songService.getHitsByConcert(code, ConcertDetailSongsCount);
         final List<SongData> songFacadeData = new ArrayList<>();
         for (final SongModel sm : songModels)
         {
@@ -186,7 +190,11 @@ public class DefaultSongFacade implements SongFacade
         //this.concertService = concertService;
         this.concertService = concertService;
     }
-
+//    @Required
+//    public void setConfigurationService(final ConfigurationService configService)
+//    {
+//        this.configService = configService;
+//    }
 
 }
 //Hybris123SnippetEnd

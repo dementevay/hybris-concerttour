@@ -9,7 +9,7 @@ public interface SongFacade
     List<SongData> getSongs();
     List<SongData> getSongsByConcerts(String code);
     List<SongData> getSongsByAlbum(final String code);
-    List<SongData> getHitsByConcert(String code);
+    List<SongData> getHitsByConcert(String code, String CONCERT_DETAIL_SONGS_COUNT);
     List<SongData> getUntipicalSongsByConcert(String code);
 }
 //Hybris123SnippetEnd

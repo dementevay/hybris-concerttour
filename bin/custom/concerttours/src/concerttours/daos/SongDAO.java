@@ -39,7 +39,7 @@ public interface SongDAO
     List<SongModel> findSongsByCode(String code);
     List<SongModel> findSongsByConcert(String code);
     List<SongModel> findSongsByAlbum(final String code);
-    List<SongModel> findHitsByConcert(String code);
+    List<SongModel> findHitsByConcert(String code, String ConcertDetailSongsCount);
     List<SongModel> findUntipicalSongsByConcert(String code);
 //    List<SongModel> findUntipicalSongsByConcert(String code);
 //    List<SongModel> findTopSongCompositorsByConcert(String code);

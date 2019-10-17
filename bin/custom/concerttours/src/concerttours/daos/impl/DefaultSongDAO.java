@@ -134,7 +134,7 @@ public class DefaultSongDAO implements SongDAO
     }
 
     @Override
-    public List<SongModel> findHitsByConcert(final String code)
+    public List<SongModel> findHitsByConcert(final String code, String ConcertDetailSongsCount)
     {
         final String queryString = //
                 "SELECT {c2s:" + TARGET + "}" //
@@ -151,9 +151,10 @@ public class DefaultSongDAO implements SongDAO
                         + "WHERE " + "{c2:" + ConcertModel.CODE + "}=?code "//
                         + "}}) }}) t1}}) "//
                 + " group by {c2s:" + TARGET + "} "//
-                + " having count(*)>=2 ";
+                + " having count(*)>=?ConcertDetailSongsCount ";
         final FlexibleSearchQuery query = new FlexibleSearchQuery(queryString);
         query.addQueryParameter("code", code);
+        query.addQueryParameter("ConcertDetailSongsCount", ConcertDetailSongsCount);
         return flexibleSearchService.<SongModel> search(query).getResult();
     }
 

@@ -2,8 +2,11 @@
 package concerttours.service.impl;
 
 import concerttours.daos.SongDAO;
+import concerttours.daos.ConcertDAO;
 import concerttours.model.SongModel;
+import concerttours.model.ConcertModel;
 import concerttours.service.SongService;
+import concerttours.service.ConcertService;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import org.springframework.beans.factory.annotation.Required;
@@ -49,14 +52,14 @@ public class DefaultSongService implements SongService
     @Override
     public List<SongModel> getSongsByAlbum(final String code) throws AmbiguousIdentifierException, UnknownIdentifierException
     {
-        final List<SongModel> result = songDAO.findSongsByAlbum(code);
-        return result;
+
+        return songDAO.findSongsByAlbum(code);
     }
 
     @Override
-    public List<SongModel> getHitsByConcert(final String code) throws AmbiguousIdentifierException, UnknownIdentifierException
+    public List<SongModel> getHitsByConcert(final String code, final String ConcertDetailSongsCount) throws AmbiguousIdentifierException, UnknownIdentifierException
     {
-        final List<SongModel> result = songDAO.findHitsByConcert(code);
+        final List<SongModel> result = songDAO.findHitsByConcert(code, ConcertDetailSongsCount);
         return result;
     }
 
@@ -72,6 +75,26 @@ public class DefaultSongService implements SongService
     {
         this.songDAO = songDAO;
     }
+    @Required
+    public void setConcertDAO(final ConcertDAO concertDAO)
+    {
+        this.sconcertDAO = concertDAO;
+    }
 
+    @Override
+    public List<ConcertModel> getConcertForCode(final String code) throws AmbiguousIdentifierException, UnknownIdentifierException
+    {
+        final List<SongModel> resultSongs = songDAO.findSongsByCode(code);
+        final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
+        if (result.isEmpty())
+        {
+            throw new UnknownIdentifierException("Song with code '" + code + "' not found!");
+        }
+        else if (result.size() > 1)
+        {
+            throw new AmbiguousIdentifierException("Song code '" + code + "' is not unique, " + result.size() + " bands found!");
+        }
+        return result.get(0);
+    }
 }
 //Hybris123SnippetEnd

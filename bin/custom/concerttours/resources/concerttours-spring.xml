@@ -28,6 +28,18 @@
      </bean>
     <!-- Hybris123SnippetEnd -->
 
+
+
+
+<!--    <alias name = "concertController" alias = "concertController" />-->
+<!--    <bean id = "concertController" class = "concerttours.controller.ConcertController" >-->
+<!--        <property name="configurationService" ref="configurationService" />-->
+<!--    </bean>-->
+
+
+
+
+
      <!--
      Hybris123SnippetStart injectingDefaultBandFacade
       -->
@@ -56,6 +68,7 @@
     <bean id = "defaultSongFacade" class ="concerttours.facades.impl.DefaultSongFacade" >
         <property name = "songService" ref = "songService" />
         <property name = "concertService" ref = "concertService" />
+
     </bean>
 
     <alias name = "defaultAuthorService" alias = "authorService" />

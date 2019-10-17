@@ -3,6 +3,7 @@
 package concerttours.service;
 
 import concerttours.model.SongModel;
+import concerttours.model.ConcertModel;
 
 import java.util.List;
 
@@ -25,9 +26,10 @@ public interface SongService
     SongModel getSongForCode(String code);
 
     List<SongModel> getSongsByConcert(String code);
+    List<ConcertModel> getConcertForCode(String code);
 
     List<SongModel> getSongsByAlbum(final String code);
-    List<SongModel> getHitsByConcert(final String code);
+    List<SongModel> getHitsByConcert(final String code, final String ConcertDetailSongsCount);
     List<SongModel> getUntipicalSongsByConcert(final String code);
 
 
