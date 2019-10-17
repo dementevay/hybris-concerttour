@@ -1,5 +1,13 @@
 .DS_Store
-/.idea
+.idea
+gensrc
+classes
+platformhome.properties
+extensioninfo.xsd
+build.xml
+**/beans.xsd
+**/items.xsd
+concerttours-testclasses.xml
 /data
 /idea-module-files
 /log
