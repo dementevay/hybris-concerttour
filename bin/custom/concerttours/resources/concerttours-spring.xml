@@ -62,6 +62,7 @@
     <alias name = "defaultSongService" alias = "songService" />
     <bean id = "defaultSongService" class = "concerttours.service.impl.DefaultSongService" >
         <property name = "songDAO" ref = "songDAO" />
+        <property name = "concertDAO" ref = "concertDAO" />
     </bean>
 
     <alias name = "defaultSongFacade" alias = "songFacade" />

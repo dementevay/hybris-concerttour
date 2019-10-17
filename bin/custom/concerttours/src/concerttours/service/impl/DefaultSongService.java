@@ -3,6 +3,8 @@ package concerttours.service.impl;
 
 import concerttours.daos.SongDAO;
 import concerttours.daos.ConcertDAO;
+import concerttours.enums.ConcertType;
+import concerttours.enums.MusicType;
 import concerttours.model.SongModel;
 import concerttours.model.ConcertModel;
 import concerttours.service.SongService;
@@ -11,11 +13,13 @@ import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import org.springframework.beans.factory.annotation.Required;
 
+import java.util.Collection;
 import java.util.List;
 
 public class DefaultSongService implements SongService
 {
     private SongDAO songDAO;
+    private ConcertDAO concertDAO;
     /**
      * Gets all bands by delegating to {@link BandDAO#findBands()}.
      */
@@ -64,37 +68,47 @@ public class DefaultSongService implements SongService
     }
 
     @Override
-    public List<SongModel> getUntipicalSongsByConcert(final String code) throws AmbiguousIdentifierException, UnknownIdentifierException
+    public List<SongModel> getUntipicalSongsByConcert(final String code)
+//            throws AmbiguousIdentifierException, UnknownIdentifierException
     {
-        final List<SongModel> result = songDAO.findUntipicalSongsByConcert(code);
+        List<SongModel> result = null;
+        final List<SongModel> resultSongs = songDAO.findSongsByConcert(code);
+        final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
+
+        for (final SongModel sm : resultSongs) {
+            for (final ConcertModel cm : resultConcerts) {
+                MusicType concertType = cm.getTypes();
+                final Collection<MusicType> songTypes = sm.getTypes();
+                if (!songTypes.equals(concertType)) {
+                    result = resultSongs;
+                }
+            }
+        }
         return result;
     }
-
-       @Required
-    public void setSongDAO(final SongDAO songDAO)
-    {
-        this.songDAO = songDAO;
-    }
-    @Required
-    public void setConcertDAO(final ConcertDAO concertDAO)
-    {
-        this.sconcertDAO = concertDAO;
-    }
-
-    @Override
-    public List<ConcertModel> getConcertForCode(final String code) throws AmbiguousIdentifierException, UnknownIdentifierException
-    {
-        final List<SongModel> resultSongs = songDAO.findSongsByCode(code);
-        final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
-        if (result.isEmpty())
+        @Required
+        public void setSongDAO ( final SongDAO songDAO)
         {
-            throw new UnknownIdentifierException("Song with code '" + code + "' not found!");
+            this.songDAO = songDAO;
         }
-        else if (result.size() > 1)
+        @Required
+        public void setConcertDAO ( final ConcertDAO concertDAO)
         {
-            throw new AmbiguousIdentifierException("Song code '" + code + "' is not unique, " + result.size() + " bands found!");
+            this.concertDAO = concertDAO;
         }
-        return result.get(0);
+
+        @Override
+        public List<ConcertModel> getConcertForCode ( final String code) throws
+        AmbiguousIdentifierException, UnknownIdentifierException
+        {
+            final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
+            if (resultConcerts.isEmpty()) {
+                throw new UnknownIdentifierException("Song with code '" + code + "' not found!");
+            } else if (resultConcerts.size() > 1) {
+                throw new AmbiguousIdentifierException("Song code '" + code + "' is not unique, " + resultConcerts.size() + " bands found!");
+            }
+            return resultConcerts;
+        }
     }
-}
+
 //Hybris123SnippetEnd
