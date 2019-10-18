@@ -87,10 +87,11 @@
 			</targetElement>
 		</relation>
 		<relation code="Concert2MusicType" autocreate="true" generate="false" localized="false">
+			<deployment table="Song2MusicType" typecode="30284" />
 			<sourceElement qualifier="concerts" type="Concert" collectiontype="set" cardinality="many" ordered="false">
 				<modifiers read="true" write="true" search="true" optional="true" />
 			</sourceElement>
-			<targetElement qualifier="types" type="MusicType" cardinality="one">
+			<targetElement qualifier="types" type="MusicType" cardinality="many">
 				<modifiers read="true" write="true" search="true" optional="true" />
 			</targetElement>
 		</relation>

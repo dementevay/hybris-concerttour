@@ -77,8 +77,9 @@ public class DefaultSongService implements SongService
 
         for (final SongModel sm : resultSongs) {
             for (final ConcertModel cm : resultConcerts) {
-                MusicType concertType = cm.getTypes();
                 final Collection<MusicType> songTypes = sm.getTypes();
+                Collection<MusicType> concertType = cm.getTypes();
+
                 if (!songTypes.equals(concertType)) {
                     result = resultSongs;
                 }
