@@ -50,7 +50,7 @@ public class ConcertController
         final List<AlbumData> albums = albumFacade.getAlbumsByConcert(decodedConcertId);
         final List<SongData> hits = songFacade.getHitsByConcert(decodedConcertId,songsCount);
         final long countAlbums = albumFacade.getCountAlbumsByConcert(decodedConcertId);
-        final List<SongData> untypicalSongs = songFacade.getUntipicalSongsByConcert(decodedConcertId);
+        final Integer untypicalSongs = songFacade.getUntipicalSongsByConcert(decodedConcertId);
         model.addAttribute("concert", concert);
         model.addAttribute("songs", songs);
         model.addAttribute("authors", authors);

@@ -30,7 +30,7 @@ public interface SongService
 
     List<SongModel> getSongsByAlbum(final String code);
     List<SongModel> getHitsByConcert(final String code, final String ConcertDetailSongsCount);
-    List<SongModel> getUntipicalSongsByConcert(final String code);
+    Integer getUntipicalSongsByConcert(final String code);
 
 
 }

@@ -55,7 +55,7 @@
         </c:forEach>
     </ul>
 
-    <p>Quantity of untypical Songs: ${fn:length(untypicalSongs)}</p>
+    <p>Quantity of untypical Songs: ${untypicalSongs}</p>
     <br/>
 
     <a href="../tours/201701">Back to Tour Details</a>

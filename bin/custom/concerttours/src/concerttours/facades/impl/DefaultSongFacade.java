@@ -63,21 +63,26 @@ public class DefaultSongFacade implements SongFacade
     }
 
 
+//    @Override
+//    public List<SongData> getUntipicalSongsByConcert(final String code)
+//    {
+//        final List<SongModel> songModels = songService.getUntipicalSongsByConcert(code);
+//        final List<SongData> songFacadeData = new ArrayList<>();
+//        for (final SongModel sm : songModels)
+//        {
+//            final SongData sfd = new SongData();
+//            sfd.setId(sm.getCode());
+//            sfd.setName(sm.getName());
+//            sfd.setSongDuration(sm.getSongDuration());
+//            sfd.setLyrics(sm.getLyrics());
+//            songFacadeData.add(sfd);
+//        }
+//        return songFacadeData;
+//    }
+
     @Override
-    public List<SongData> getUntipicalSongsByConcert(final String code)
-    {
-        final List<SongModel> songModels = songService.getUntipicalSongsByConcert(code);
-        final List<SongData> songFacadeData = new ArrayList<>();
-        for (final SongModel sm : songModels)
-        {
-            final SongData sfd = new SongData();
-            sfd.setId(sm.getCode());
-            sfd.setName(sm.getName());
-            sfd.setSongDuration(sm.getSongDuration());
-            sfd.setLyrics(sm.getLyrics());
-            songFacadeData.add(sfd);
-        }
-        return songFacadeData;
+    public Integer getUntipicalSongsByConcert(final String code) {
+        return songService.getUntipicalSongsByConcert(code);
     }
 
     @Override

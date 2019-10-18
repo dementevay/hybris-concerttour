@@ -68,25 +68,35 @@ public class DefaultSongService implements SongService
     }
 
     @Override
-    public List<SongModel> getUntipicalSongsByConcert(final String code)
-//            throws AmbiguousIdentifierException, UnknownIdentifierException
-    {
-        List<SongModel> result = null;
+    public Integer getUntipicalSongsByConcert(final String code) {
+        Integer result = 0;
+        Integer test = 0;
         final List<SongModel> resultSongs = songDAO.findSongsByConcert(code);
         final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
 
-        for (final SongModel sm : resultSongs) {
-            for (final ConcertModel cm : resultConcerts) {
+        for (final ConcertModel cm : resultConcerts)
+        {
+            for (final SongModel sm : resultSongs)
+            {
                 final Collection<MusicType> songTypes = sm.getTypes();
                 Collection<MusicType> concertType = cm.getTypes();
 
-                if (!songTypes.equals(concertType)) {
-                    result = resultSongs;
+                for (final MusicType ctm : concertType)
+                {
+                    if (!songTypes.equals(ctm))
+                    {
+                        test = ++test;
+                    }
+                }
+                if (test == 0)
+                {
+                 result = ++result;
                 }
             }
         }
         return result;
     }
+
         @Required
         public void setSongDAO ( final SongDAO songDAO)
         {
