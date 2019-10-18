@@ -26,8 +26,8 @@ INSERT_UPDATE Concert;code[unique=true];name;date[dateformat=dd.MM.yyyy];venue;c
 ;20170102;Grand Tour - London;21.03.2017;"hybris London, UK";openair;201701;
 ;20170103;Grand Tour - Montreal;15.06.2017;"hybris Montreal, Canada";indoor;201701;
 ;20170104;Grand Tour - Gliwice;04.11.2017;"hybris Gliwice, Poland";indoor;201701;
-;20170105;Grand Tour - Boulder;07.01.2018;"hybris Boulder, USA";indoor;
-;20170106;Grand Tour - Boston;;"hybris Boston, USA";;201701;
+;20170105;Grand Tour - Boulder;07.01.2018;"hybris Boulder, USA";indoor;201701
+;20170106;Grand Tour - Boston;10.01.2018;;"hybris Boston, USA";openair;201701;
 
 
 

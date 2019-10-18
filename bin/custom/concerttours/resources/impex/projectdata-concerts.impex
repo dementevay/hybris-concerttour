@@ -74,13 +74,13 @@ INSERT_UPDATE Band;code[unique=true];types(code)
 # ImpEx for Importing Bands music type assignments
 
 INSERT_UPDATE Concert;code[unique=true];types(code)
-;20170101;eighties
+;20170101;eighties,pop
 ;20170102;rock
 ;20170103;jazz
 ;20170104;choral
 ;20170105;gospel
-;20170106;classical,pop
-;20170107;pop
+;20170106;classical
+
 # Hybris123SnippetEnd
 
 # ImpEx for Importing Bands music type assignments
@@ -92,5 +92,5 @@ INSERT_UPDATE Concert;code[unique=true];songs(code)
 ;20170104;01,02,03,04,05,06,07,08,09,10,11,12
 ;20170105;04,05,06,07,08,09,10,11,12
 ;20170106;01,02,03,04,05,06,07,08,09,10,11
-;20170107;02,03,07,08,09,10,11
+
 # Hybris123SnippetEnd

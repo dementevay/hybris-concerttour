@@ -3,18 +3,18 @@ package concerttours.service.impl;
 
 import concerttours.daos.SongDAO;
 import concerttours.daos.ConcertDAO;
-import concerttours.enums.ConcertType;
 import concerttours.enums.MusicType;
 import concerttours.model.SongModel;
 import concerttours.model.ConcertModel;
 import concerttours.service.SongService;
-import concerttours.service.ConcertService;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import org.springframework.beans.factory.annotation.Required;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DefaultSongService implements SongService
 {
@@ -36,7 +36,7 @@ public class DefaultSongService implements SongService
     }
 
     /**
-     * Gets all bands for given code by delegating to {@link BandDAO#findBandsByCode(String)} and then assuring
+     * Gets all bands for given concertCode by delegating to {@link BandDAO#findBandsByCode(String)} and then assuring
      * uniqueness of result.
      */
     @Override
@@ -45,11 +45,11 @@ public class DefaultSongService implements SongService
         final List<SongModel> result = songDAO.findSongsByCode(code);
         if (result.isEmpty())
         {
-            throw new UnknownIdentifierException("Song with code '" + code + "' not found!");
+            throw new UnknownIdentifierException("Song with concertCode '" + code + "' not found!");
         }
         else if (result.size() > 1)
         {
-            throw new AmbiguousIdentifierException("Song code '" + code + "' is not unique, " + result.size() + " bands found!");
+            throw new AmbiguousIdentifierException("Song concertCode '" + code + "' is not unique, " + result.size() + " bands found!");
         }
         return result.get(0);
     }
@@ -68,32 +68,38 @@ public class DefaultSongService implements SongService
     }
 
     @Override
-    public Integer getUntipicalSongsByConcert(final String code) {
+    public Integer getUntipicalSongsByConcert(final String concertCode) {
         Integer result = 0;
-        Integer test = 0;
-        final List<SongModel> resultSongs = songDAO.findSongsByConcert(code);
-        final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
 
-        for (final ConcertModel cm : resultConcerts)
-        {
+        final List<SongModel> resultSongs = songDAO.findSongsByConcert(concertCode);
+        final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(concertCode);
+        ConcertModel concert = resultConcerts.get(0);
+
+
             for (final SongModel sm : resultSongs)
             {
-                final Collection<MusicType> songTypes = sm.getTypes();
-                Collection<MusicType> concertType = cm.getTypes();
-
-                for (final MusicType ctm : concertType)
-                {
-                    if (!songTypes.equals(ctm))
+                Set<MusicType> songTypes = new HashSet<>(sm.getTypes());
+                Set<MusicType> concertType = new HashSet<>(concert.getTypes());
+                Integer test = 0;
+                    for (final MusicType stm : songTypes)
                     {
-                        test = ++test;
+
+                        if (concertType.contains(stm))
+                        {
+                            break;
+                        }
+                        else
+                            {
+                                test++;
+                            }
                     }
-                }
-                if (test == 0)
-                {
-                 result = ++result;
-                }
+                    if (songTypes.size() == test)
+                    {
+                        result++;
+                    }
             }
-        }
+
+
         return result;
     }
 
@@ -114,9 +120,9 @@ public class DefaultSongService implements SongService
         {
             final List<ConcertModel> resultConcerts = concertDAO.findConcertsByCode(code);
             if (resultConcerts.isEmpty()) {
-                throw new UnknownIdentifierException("Song with code '" + code + "' not found!");
+                throw new UnknownIdentifierException("Song with concertCode '" + code + "' not found!");
             } else if (resultConcerts.size() > 1) {
-                throw new AmbiguousIdentifierException("Song code '" + code + "' is not unique, " + resultConcerts.size() + " bands found!");
+                throw new AmbiguousIdentifierException("Song concertCode '" + code + "' is not unique, " + resultConcerts.size() + " bands found!");
             }
             return resultConcerts;
         }
