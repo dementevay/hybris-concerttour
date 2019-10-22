@@ -79,7 +79,7 @@ INSERT_UPDATE Concert;code[unique=true];types(code)
 ;20170103;jazz
 ;20170104;choral
 ;20170105;gospel
-;20170106;classical
+
 
 # Hybris123SnippetEnd
 
@@ -91,6 +91,6 @@ INSERT_UPDATE Concert;code[unique=true];songs(code)
 ;20170103;01,02,03,04,05,06,07,08,09
 ;20170104;01,02,03,04,05,06,07,08,09,10,11,12
 ;20170105;04,05,06,07,08,09,10,11,12
-;20170106;01,02,03,04,05,06,07,08,09,10,11
+
 
 # Hybris123SnippetEnd

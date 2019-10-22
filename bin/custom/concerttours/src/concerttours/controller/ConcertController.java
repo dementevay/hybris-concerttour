@@ -3,11 +3,16 @@ package concerttours.controller;
 import concerttours.data.*;
 import concerttours.facades.*;
 import concerttours.jalo.Author;
+import concerttours.model.ConcertModel;
+import concerttours.model.SongModel;
 import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -41,7 +46,7 @@ public class ConcertController
     {
         catalogVersionService.setSessionCatalogVersion(CATALOG_ID, CATALOG_VERSION_NAME);
 
-        final String songsCount = configService.getConfiguration().getString(CONCERT_DETAIL_SONGS_COUNT);
+        final int songsCount = configService.getConfiguration().getInt(CONCERT_DETAIL_SONGS_COUNT);
         final String decodedConcertId = URLDecoder.decode(concertId, "UTF-8");
         final ConcertData concert = concertFacade.getConcert(decodedConcertId);
         final List<SongData> songs = songFacade.getSongsByConcerts(decodedConcertId);

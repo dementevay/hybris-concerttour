@@ -2,10 +2,13 @@
 
 package concerttours.service;
 
+import concerttours.model.AuthorModel;
 import concerttours.model.SongModel;
 import concerttours.model.ConcertModel;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface SongService
 {
@@ -29,8 +32,9 @@ public interface SongService
     List<ConcertModel> getConcertForCode(String code);
 
     List<SongModel> getSongsByAlbum(final String code);
-    List<SongModel> getHitsByConcert(final String code, final String ConcertDetailSongsCount);
+    Map<SongModel, Set<ConcertModel>> getHitsByConcert (final String code, int ConcertDetailSongsCount);
     Integer getUntipicalSongsByConcert(final String code);
+//    List<AuthorModel> getTopSongAuthorsByConcert(String code);
 
 
 }

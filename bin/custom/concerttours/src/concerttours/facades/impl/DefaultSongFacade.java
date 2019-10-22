@@ -15,10 +15,7 @@ import de.hybris.platform.core.model.product.ProductModel;
 import org.springframework.beans.factory.annotation.Required;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class DefaultSongFacade implements SongFacade
 {
@@ -148,35 +145,29 @@ public class DefaultSongFacade implements SongFacade
         return songFacadeData;
     }
 
-    public List<SongData> getHitsByConcert(final String code, String ConcertDetailSongsCount)
+    public List<SongData> getHitsByConcert(final String code, int ConcertDetailSongsCount)
     {
         final ConcertModel currentConcert = concertService.getConcertForCode(code);
 //        final String SongsCount = configService.getConfiguration().getString(CONCERT_DETAIL_SONGS_COUNT);
-        final List<SongModel> songModels = songService.getHitsByConcert(code, ConcertDetailSongsCount);
+        final Map<SongModel, Set<ConcertModel>> songModels = songService.getHitsByConcert(code, ConcertDetailSongsCount);
         final List<SongData> songFacadeData = new ArrayList<>();
-        for (final SongModel sm : songModels)
+        for (Map.Entry<SongModel, Set<ConcertModel>> sm : songModels.entrySet())
         {
             List<ConcertData> concerts = new ArrayList<>();
-            for (final ConcertModel cm : sm.getConcerts() )
+            for (final ConcertModel cm : sm.getValue() )
             {
-                Date sdate = cm.getDate();
-                Date cdate = currentConcert.getDate();
-                if(sdate != null && sdate.before(cdate)){
                     ConcertData concData = new ConcertData();
                     concData.setId(cm.getCode());
                     concData.setDate(cm.getDate());
                     concData.setVenue(cm.getVenue());
-                    if(!cm.getCode().equals(code))
-                    {
-                        concerts.add(concData);
-                    }
-                }
+                    concerts.add(concData);
             }
+
             final SongData sfd = new SongData();
-            sfd.setId(sm.getCode());
-            sfd.setName(sm.getName());
-            sfd.setSongDuration(sm.getSongDuration());
-            sfd.setLyrics(sm.getLyrics());
+            sfd.setId(sm.getKey().getCode());
+            sfd.setName(sm.getKey().getName());
+            sfd.setSongDuration(sm.getKey().getSongDuration());
+            sfd.setLyrics(sm.getKey().getLyrics());
             sfd.setConcerts(concerts);
             songFacadeData.add(sfd);
         }

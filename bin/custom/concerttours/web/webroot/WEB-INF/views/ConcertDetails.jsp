@@ -16,18 +16,27 @@
     </ul>
 
 
-    <p>Hits of concert:</p>
-        <ul>
-            <c:forEach var="song" items="${hits}">
+<%--    <p>Hits of concert:</p>--%>
+<%--        <ul>--%>
+<%--            <c:forEach var="song" items="${hits}">--%>
 
-                <li><a href="../songs/${song.id}">${song.name}</a></li></td><td>
-                <ul>
-                    <c:forEach var="concert" items="${song.concerts}">
-                        <li><a href="../concerts/${concert.id}">${concert.venue}</a></li>
-                    </c:forEach>
-                </ul>
-        </c:forEach>
+<%--                <li><a${song.key}">${song.value}</a></li></td><td>--%>
+
+<%--        </c:forEach>--%>
+<%--        </ul>--%>
+
+    <p>Hits of concert:</p>
+    <ul>
+        <c:forEach var="song" items="${hits}">
+
+        <li><a href="../songs/${song.id}">${song.name}</a></li></td><td>
+        <ul>
+            <c:forEach var="concert" items="${song.concerts}">
+                <li><a href="../concerts/${concert.id}">${concert.venue}</a></li>
+            </c:forEach>
         </ul>
+        </c:forEach>
+    </ul>
 
 
 
